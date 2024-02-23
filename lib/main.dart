@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: countTwoNumbers()
+    home: counter_iterate()
   ));
 }
 
-class countTwoNumbers extends StatefulWidget {
-  const countTwoNumbers({ super.key });
+class counter_iterate extends StatefulWidget {
+  const counter_iterate({ super.key });
 
   @override
-  State<countTwoNumbers> createState() => _countTwoNumbers();
+  State<counter_iterate> createState() => _counter_iterate();
 }
 
-class _countTwoNumbers extends State<countTwoNumbers> {
-  String line1 = "bla1";
-  String line2 = "bla2";
-  String result = "";
+class _counter_iterate extends State<counter_iterate> {
+
+  int result = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,7 @@ class _countTwoNumbers extends State<countTwoNumbers> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("first line - ${line1}"),
-                        Text("second line - ${line2}"),
+
                         Text("${result}")
                       ],
                     )
@@ -51,15 +49,6 @@ class _countTwoNumbers extends State<countTwoNumbers> {
               ),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              result = line1 + line2;
-            });
-          },
-          child: Icon(Icons.add, color: Colors.white,),
-          backgroundColor: Colors.blueGrey,
         ),
       );
   }
