@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: counter_iterate()
-  ));
+  runApp(const MaterialApp(
+    home: CounterIterate(),
+  ),);
 }
 
-class counter_iterate extends StatefulWidget {
-  const counter_iterate({ super.key });
+class CounterIterate extends StatefulWidget {
+  const CounterIterate({ super.key });
 
   @override
-  State<counter_iterate> createState() => _counter_iterate();
+  State<CounterIterate> createState() => _CounterIterate();
 }
 
-class _counter_iterate extends State<counter_iterate> {
+class _CounterIterate extends State<CounterIterate> {
 
   int result = 0;
 
-  final MyController = TextEditingController();
+  final myController = TextEditingController();
 
   @override
   void dispose() {
-    MyController.dispose();
+    myController.dispose();
     super.dispose();
   }
 
@@ -30,58 +30,55 @@ class _counter_iterate extends State<counter_iterate> {
     return
       Scaffold(
         appBar: AppBar(
-          title: Text("LAB 1", style: TextStyle(
+          title: const Text('LAB 1', style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
-          )),
+          ),),
           backgroundColor: Colors.blueGrey[600],
           centerTitle: true,
         ),
-        body: Container(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Row(
-                            children:
-                              <Widget>[
-                                SizedBox(width: 100,
-                                  child: TextField(
-                                  controller: MyController,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "Enter Number To Increment",
-                                    fillColor: Colors.grey[200],
-                                    filled: true,
-                                  ),
-                                ),),
-                              ],
-                          ),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children:
+                            <Widget>[
+                              SizedBox(width: 100,
+                                child: TextField(
+                                controller: myController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Enter Number To Increment',
+                                  fillColor: Colors.grey[200],
+                                  filled: true,
+                                ),
+                              ),),
+                            ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text("${result}"),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text('$result'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
-              var value = int.tryParse(MyController.text);
+              final value = int.tryParse(myController.text);
               if (value == null) {
                 result = 0;
               }
@@ -90,8 +87,8 @@ class _counter_iterate extends State<counter_iterate> {
               }
             });
           },
-          child: Icon(Icons.edit_rounded, color: Colors.white,),
           backgroundColor: Colors.blueGrey,
+          child: const Icon(Icons.edit_rounded, color: Colors.white,),
         ),
       );
   }
