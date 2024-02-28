@@ -83,7 +83,7 @@ class _CounterIterate extends State<CounterIterate> {
                 result = 0;
               }
               else {
-                result = value;
+                result += value;
               }
             });
           },
