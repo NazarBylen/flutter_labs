@@ -1,65 +1,94 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: countTwoNumbers()
-  ));
+  runApp(const MaterialApp(
+    home: CounterIterate(),
+  ),);
 }
 
-class countTwoNumbers extends StatefulWidget {
-  const countTwoNumbers({ super.key });
+class CounterIterate extends StatefulWidget {
+  const CounterIterate({ super.key });
 
   @override
-  State<countTwoNumbers> createState() => _countTwoNumbers();
+  State<CounterIterate> createState() => _CounterIterate();
 }
 
-class _countTwoNumbers extends State<countTwoNumbers> {
-  String line1 = "bla1";
-  String line2 = "bla2";
-  String result = "";
+class _CounterIterate extends State<CounterIterate> {
+
+  int result = 0;
+
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return
       Scaffold(
         appBar: AppBar(
-          title: Text("LAB 1", style: TextStyle(
+          title: const Text('LAB 1', style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
-          )),
+          ),),
           backgroundColor: Colors.blueGrey[600],
           centerTitle: true,
         ),
-        body: Container(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("first line - ${line1}"),
-                        Text("second line - ${line2}"),
-                        Text("${result}")
-                      ],
-                    )
-                  ],
-                ),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children:
+                            <Widget>[
+                              SizedBox(width: 100,
+                                child: TextField(
+                                controller: myController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Enter Number To Increment',
+                                  fillColor: Colors.grey[200],
+                                  filled: true,
+                                ),
+                              ),),
+                            ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text('$result'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
-              result = line1 + line2;
+              final value = int.tryParse(myController.text);
+              if (value == null) {
+                result = 0;
+              }
+              else {
+                result += value;
+              }
             });
           },
-          child: Icon(Icons.add, color: Colors.white,),
           backgroundColor: Colors.blueGrey,
+          child: const Icon(Icons.edit_rounded, color: Colors.white,),
         ),
       );
   }
